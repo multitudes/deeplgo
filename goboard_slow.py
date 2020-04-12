@@ -177,9 +177,9 @@ class Board():
 
 
 class GameState():
-    def __init__(self, board, next_Player, previous, move):
+    def __init__(self, board, next_player, previous, move):
         self.board = board
-        self.next_Player = next_Player
+        self.next_player = next_player
         self.previous_state = previous
         self.last_move = move
 
@@ -188,10 +188,10 @@ class GameState():
     def apply_move(self, move):
         if move.is_play:
             next_board = copy.deepcopy(self.board)
-            next_board.place_Stone(self.next_Player, move.point)
+            next_board.place_Stone(self.next_player, move.point)
         else:
             next_board = self.board
-        return GameState(next_board, self.next_Player.other, self, move)
+        return GameState(next_board, self.next_player.other, self, move)
 
     @classmethod
     def new_game(cls, board_size):
@@ -218,3 +218,53 @@ class GameState():
 # Check that the move isn’t a self­capture.
 # Confirm that the move doesn’t violate the ko rule.
 
+# You’ll enforce the self­capture rule in your code. 
+#  in general, you must remove opponent stones first before 
+# checking whether the newly played stone has any liberties. 
+# in GameState you’ll enforce the rule by applying the move to 
+# a copy of the board and checking the number of liberties afterward.
+
+    def is_move_self_capture(self, player, move): 
+        if not move.is_play:
+            return False
+        next_board = copy.deepcopy(self.board)
+        next_board.place_stone(player, move.point)
+        new_string = next_board.get_go_string(move.point)
+        return new_string.num_liberties == 0
+
+# Having checked for self­capture, you can now move on to implement the ko rule. 
+# the ko rule applies if a move would return the board to the exact previous position
+# But snapbacks are common
+
+# situational superko rule.
+
+# Because each GameState instance keeps a pointer to the previous state, 
+# you can enforce the ko rule by walking back up the tree and checking 
+# the new state against the whole history. 
+# You do so by adding the following method to your GameState implementation.
+
+    @property
+    def situation(self):
+        return (self.next_player, self.board)
+
+    def does_move_violate_ko(self, player, move): 
+        if not move.is_play:
+            return False
+        next_board = copy.deepcopy(self.board) 
+        next_board.place_stone(player, move.point) 
+        next_situation = (player.other, next_board) 
+        past_state = self.previous_state
+        while past_state is not None:
+            if past_state.situation == next_situation: 
+                return True
+            past_state = past_state.previous_state 
+        return False
+
+    def is_valid_move(self, move): 
+        if self.is_over():
+            return False
+        if move.is_pass or move.is_resign:
+            return True 
+        return (self.board.get(move.point) is None and
+            not self.is_move_self_capture(self.next_player, move) 
+            and not self.does_move_violate_ko(self.next_player, move))        
