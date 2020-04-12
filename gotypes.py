@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import enum
 from collections import namedtuple
 
@@ -16,7 +18,8 @@ class Player(enum.Enum):
 
 class Point(namedtuple('Point', 'row col')):
     # /* thanks to named tuples my neighbors array will be:
-    # [Point(row=0, col=2), Point(row=2, col=2), Point(row=1, col=1), Point(row=1, col=3)] */ 
+    # [Point(row=0, col=2), Point(row=2, col=2),
+    # Point(row=1, col=1), Point(row=1, col=3)]
     def neighbors(self):
         return [
             Point(self.row - 1, self.col),
@@ -32,3 +35,4 @@ print(b)
 
 white = Player(1)
 print(white.other)
+

@@ -1,8 +1,6 @@
+# -*- coding: utf-8 -*-
 import copy
-from dlgo.gotypes import Player
-
-# Move class is plain data types like Player and Point
-# don’t contain any game logic
+from gotypes import Player
 
 
 class Move():
@@ -36,7 +34,7 @@ class Move():
 
 class GoString():
     # Tracking connected groups of stones in Go: strings
-    # you’ll keep track of groups of connected stones of the same color and 
+    # you’ll keep track of groups of connected stones of the same color and
     # their liberties at the same time
     # Go strings are a chain of connected stones of the same color.
     def __init__(self, color, stones, liberties):
@@ -84,8 +82,8 @@ class Board():
 
     def place_Stone(self, player, point):
         # you first have to inspect all neighboring stones of a given point
-        # for liberties. 
-        # Check if in the boundary of the board- 
+        # for liberties.
+        # Check if in the boundary of the board-
         # is_on_grid is a util method
         assert self.is_on_grid(point)
         # check the place is free for the move
@@ -170,6 +168,14 @@ class Board():
         return string
 
 
+# GameState capturing the current state of a game.
+# game state knows about:
+# the board position
+# the next player
+# the previous game state
+# and the last move that has been played
+
+
 class GameState():
     def __init__(self, board, next_Player, previous, move):
         self.board = board
@@ -177,6 +183,8 @@ class GameState():
         self.previous_state = previous
         self.last_move = move
 
+    # a move if play will create a new gamestate keeping the last one,
+    # like a tree!
     def apply_move(self, move):
         if move.is_play:
             next_board = copy.deepcopy(self.board)
@@ -188,4 +196,25 @@ class GameState():
     @classmethod
     def new_game(cls, board_size):
         if isinstance(board_size, int):
-            
+            board_size = (board_size, board_size)
+            board = Board(*board_size)
+        return GameState(board, Player.black, None, None)
+
+    def is_over(self):
+        # game is over if the last two moves are a pass or the last move
+        # is resign
+        if self.last_move is None:
+            return False
+        if self.last_move.is_resign:
+            return True
+        second_last_move = self.previous_state.last_move
+        if second_last_move is None:
+            return False
+        return self.last_move.is_pass and second_last_move.is_pass
+
+
+# write code to identify which moves are legal.
+# Confirm that the point you want to play is empty
+# Check that the move isn’t a self­capture.
+# Confirm that the move doesn’t violate the ko rule.
+
