@@ -62,10 +62,11 @@ class GoString():
     # and you can access the number of liberties at any point by calling
 
     @property
-    def num_liberties(self, other):
-        return isinstance(other, GoString) and \
-            self.stones == other.stones and \
-            self.liberties == other.liberties
+    def num_liberties(self):
+        return len(self.liberties)
+        # return isinstance(other, GoString) and \
+        #     self.stones == other.stones and \
+        #     self.liberties == other.liberties
 
     def __eq__(self, other):
         return isinstance(other, GoString) and self.color == other.color and \
@@ -80,7 +81,7 @@ class Board():
         # of stones
         self._grid = {}
 
-    def place_Stone(self, player, point):
+    def place_stone(self, player, point):
         # you first have to inspect all neighboring stones of a given point
         # for liberties.
         # Check if in the boundary of the board-
@@ -92,7 +93,7 @@ class Board():
         adjacent_opposite_color = []
         liberties = []
         # check all my neighbors. Update my liberties
-        for neighbor in point.neighbors:
+        for neighbor in point.neighbors():
             # if the neighbor is not on the board boundaries continue
             if not self.is_on_grid(neighbor):
                 continue
@@ -188,7 +189,7 @@ class GameState():
     def apply_move(self, move):
         if move.is_play:
             next_board = copy.deepcopy(self.board)
-            next_board.place_Stone(self.next_player, move.point)
+            next_board.place_stone(self.next_player, move.point)
         else:
             next_board = self.board
         return GameState(next_board, self.next_player.other, self, move)
