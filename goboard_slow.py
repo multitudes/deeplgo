@@ -127,7 +127,7 @@ class Board():
         # defined below
         for other_color_string in adjacent_opposite_color:
             if other_color_string.num_liberties == 0:
-                self.remove_string(other_color_string)
+                self._remove_string(other_color_string)
 
     def _remove_string(self, string):
         # fairly simple but other stones might gain liberties when removing an
