@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="920e93d7-45bb-4a37-99f8-b297ed9af203" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dlgo.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dlgo.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vscode/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/.vscode/settings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/goboard_slow.py" beforeDir="false" afterPath="$PROJECT_DIR$/goboard_slow.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gotypes.py" beforeDir="false" afterPath="$PROJECT_DIR$/gotypes.py" afterDir="false" />
-    </list>
+    <list default="true" id="920e93d7-45bb-4a37-99f8-b297ed9af203" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -114,10 +106,10 @@
       <screen x="0" y="23" width="1920" height="1177" />
     </state>
     <state x="194" y="48" key="SettingsEditor/0.23.1920.1177@0.23.1920.1177" timestamp="1586685802098" />
-    <state x="498" y="338" key="com.intellij.ide.util.TipDialog" timestamp="1586685779460">
+    <state x="498" y="338" key="com.intellij.ide.util.TipDialog" timestamp="1586711223546">
       <screen x="0" y="23" width="1920" height="1177" />
     </state>
-    <state x="498" y="338" key="com.intellij.ide.util.TipDialog/0.23.1920.1177@0.23.1920.1177" timestamp="1586685779460" />
+    <state x="498" y="338" key="com.intellij.ide.util.TipDialog/0.23.1920.1177@0.23.1920.1177" timestamp="1586711223546" />
     <state x="441" y="23" width="1009" height="1470" key="search.everywhere.popup" timestamp="1586368440090">
       <screen x="0" y="23" width="1920" height="1177" />
     </state>
